@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天洗头吗？</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>今天洗头吗？🤔</h1>
+
+        <div id="decision-tree">
+            <div id="q1" class="question active">
+                <h2>问题 1: 头发看起来油吗？</h2>
+                <button onclick="handleAnswer('q1', 'yes')">是</button>
+                <button onclick="handleAnswer('q1', 'no')">否</button>
+            </div>
+
+            <div id="q1a" class="question">
+                <h2>头发看起来不油，但感觉油 / 预感今天会油吗？</h2>
+                <button onclick="handleAnswer('q1a', 'yes')">是</button>
+                <button onclick="handleAnswer('q1a', 'no')">否</button>
+            </div>
+
+             <div id="q1a-sub" class="question">
+                <h2>感觉能撑到今天结束/明天吗？</h2>
+                 <button onclick="handleAnswer('q1a-sub', 'yes')">能撑住</button>
+                 <button onclick="handleAnswer('q1a-sub', 'no')">撑不住</button>
+            </div>
+
+            <div id="q2" class="question">
+                <h2>问题 2: 今天需要见“重要”的人吗？<br><small>(朋友聚会/Crush约会等)</small></h2>
+                <button onclick="handleAnswer('q2', 'yes')">是</button>
+                <button onclick="handleAnswer('q2', 'no')">否</button>
+            </div>
+
+            <div id="q3" class="question">
+                <h2>问题 3: 今天化妆，不适合戴帽子吗？</h2>
+                <button onclick="handleAnswer('q3', 'yes')">是 (不适合戴帽)</button>
+                <button onclick="handleAnswer('q3', 'no')">否 (可以戴帽/不化妆)</button>
+            </div>
+
+            <div id="q4" class="question">
+                <h2>问题 4: 今天会拍照吗？<br><small>(任何形式的照片)</small></h2>
+                <button onclick="handleAnswer('q4', 'yes')">是</button>
+                <button onclick="handleAnswer('q4', 'no')">否</button>
+            </div>
+
+            <div id="q5" class="question">
+                <h2>问题 5: 干发喷雾能解决吗？</h2>
+                <button onclick="handleAnswer('q5', 'yes')">能解决</button>
+                <button onclick="handleAnswer('q5', 'no')">不能解决</button>
+            </div>
+
+            <div id="q_future" class="question">
+                <h2>最后确认: 明后天的安排比今天更重要吗？</h2>
+                <button onclick="handleAnswer('q_future', 'yes')">是 (明后天更重要)</button>
+                <button onclick="handleAnswer('q_future', 'no')">否 (今天同样/更重要)</button>
+            </div>
+        </div>
+
+        <div id="result" class="result hidden">
+            <h2 id="result-text"></h2>
+            <button onclick="restart()">重新考虑</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+/* Import a nice Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+/* Define color variables and base styles */
+:root {
+    --primary-color: #00a0a0; /* Tealish color for positive actions/results */
+    --secondary-color: #ff7f50; /* Coral/Peach for negative actions/results */
+    --neutral-color: #6c757d;  /* Grey for neutral/secondary buttons */
+    --bg-color: #f0f4f8;       /* Lighter, slightly blueish background */
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --text-light: #555;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align top for longer content */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: var(--card-bg);
+    padding: 30px 25px; /* More vertical padding */
+    border-radius: 15px; /* Softer radius */
+    box-shadow: 0 6px 20px var(--shadow-color);
+    text-align: center;
+    max-width: 450px; /* Slightly narrower for mobile focus */
+    width: 100%;
+    overflow: hidden; /* Helps contain elements */
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 35px;
+    font-size: 2em; /* Larger title */
+    font-weight: 700;
+}
+
+#decision-tree {
+    position: relative; /* Needed for absolute positioning if doing slide transitions, good practice anyway */
+    min-height: 200px; /* Prevent container collapsing during transitions */
+}
+
+.question {
+    padding: 20px;
+    margin-bottom: 25px; /* Keep some space, though only one is visible */
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: #fdfdfd; /* Slightly off-white */
+    /* Transition properties */
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    position: absolute; /* Allow questions to overlap for transition */
+    top: 0;
+    left: 0;
+    width: calc(100% - 40px); /* Account for padding within parent */
+    visibility: hidden; /* Hide completely when not active */
+}
+
+.question.active {
+    opacity: 1;
+    transform: scale(1);
+    position: relative; /* Take up space when active */
+    visibility: visible;
+}
+
+.question h2 {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.question h2 small {
+    display: block;
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 8px;
+    font-weight: 400;
+}
+
+/* Button container for better layout */
+.question .button-group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically on mobile */
+    gap: 10px; /* Space between stacked buttons */
+}
+
+/* Updated Button Styles */
+button {
+    background: linear-gradient(145deg, var(--primary-color), #007f7f); /* Gradient for primary */
+    color: white;
+    border: none;
+    padding: 15px 25px; /* Larger padding */
+    border-radius: 30px; /* Pill shape */
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 700;
+    letter-spacing: 0.5px; /* Slight letter spacing */
+    margin: 0; /* Remove default margins if any */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 160, 160, 0.2); /* Subtle shadow matching primary */
+    width: 100%; /* Full width within the button group */
+    box-sizing: border-box;
+}
+
+/* Secondary button style (e.g., 'No', 'Can wear hat') */
+button:last-child:not(.restart-button) { /* Avoid styling the restart button this way */
+    background: linear-gradient(145deg, var(--neutral-color), #5a6268);
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.2);
+}
+
+/* Hover and Active states */
+button:hover {
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    filter: brightness(1.05); /* Slightly brighten */
+}
+
+button:active {
+    transform: translateY(0px); /* Back down on click */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Smaller shadow on click */
+    filter: brightness(0.95); /* Slightly darken */
+}
+
+
+/* Result Area Styling */
+.result {
+    margin-top: 30px;
+    padding: 30px 20px; /* More padding */
+    border-radius: 10px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.result h2 {
+    font-size: 1.8em; /* Bigger result text */
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.result.wash {
+    background-color: #e0f2f7; /* Light cyan */
+    color: #007a7a;
+    border: 1px solid #b2ebf2;
+}
+
+.result.dont-wash {
+    background-color: #fff3e0; /* Light peach/orange */
+    color: #e65100; /* Dark orange */
+    border: 1px solid #ffe0b2;
+}
+
+.result button.restart-button { /* Specific style for restart */
+    background: var(--secondary-color);
+    box-shadow: 0 4px 10px rgba(255, 127, 80, 0.2);
+    max-width: 200px; /* Don't let restart be full width */
+    display: inline-block; /* Allow centering */
+    width: auto; /* Override full width */
+    padding: 12px 30px;
+}
+
+/* Hidden class remains simple */
+.hidden {
+    display: none;
+}
+
+
+/* Media Query for wider screens (e.g., tablets/desktops) - buttons side-by-side */
+@media (min-width: 480px) {
+    .question .button-group {
+        flex-direction: row; /* Buttons side-by-side */
+        justify-content: center; /* Center buttons horizontally */
+        gap: 15px; /* Space between side-by-side buttons */
+    }
+
+    button {
+        width: auto; /* Allow buttons to size to content */
+        min-width: 140px; /* Ensure decent tap target */
+    }
+}
